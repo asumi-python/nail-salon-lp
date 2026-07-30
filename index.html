@@ -1,0 +1,409 @@
+<meta charset="UTF-8">
+<title>MAISON ONGLE</title>
+<style>
+  :root {
+    --cream: #fbf3ec;
+    --cream-raised: #f6e9de;
+    --ink: #2e2320;
+    --ink-soft: #6b5a54;
+    --rose: #c98a82;
+    --wine: #6b2737;
+    --gold: #c9a961;
+    --line: rgba(46, 35, 32, 0.15);
+
+    --font-display: Georgia, "Hiragino Mincho ProN", "Times New Roman", serif;
+    --font-jp-head: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --font-body: "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --cream: #221a1d;
+      --cream-raised: #2c2226;
+      --ink: #f3e6e0;
+      --ink-soft: #c9afa8;
+      --rose: #e3a79d;
+      --wine: #a85068;
+      --gold: #e0c078;
+      --line: rgba(243, 230, 224, 0.18);
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #221a1d;
+    --cream-raised: #2c2226;
+    --ink: #f3e6e0;
+    --ink-soft: #c9afa8;
+    --rose: #e3a79d;
+    --wine: #a85068;
+    --gold: #e0c078;
+    --line: rgba(243, 230, 224, 0.18);
+  }
+  :root[data-theme="light"] {
+    --cream: #fbf3ec;
+    --cream-raised: #f6e9de;
+    --ink: #2e2320;
+    --ink-soft: #6b5a54;
+    --rose: #c98a82;
+    --wine: #6b2737;
+    --gold: #c9a961;
+    --line: rgba(46, 35, 32, 0.15);
+  }
+
+  * { box-sizing: border-box; }
+
+  .page {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 54rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--wine);
+  }
+
+  h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--cream) 90%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+  .nav-mark {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-cta {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--wine);
+    color: var(--wine);
+    padding: 0.5em 1.1em;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--wine); color: var(--cream); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 5rem 0 5.5rem;
+    border-bottom: 1px solid var(--line);
+    background: radial-gradient(ellipse 55% 40% at 88% 0%, color-mix(in srgb, var(--gold) 20%, transparent), transparent);
+  }
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .hero-word {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    letter-spacing: 0.02em;
+    color: var(--wine);
+    margin: 0.6rem 0 1.1rem;
+    opacity: 0;
+    animation: rise-in 0.8s ease 0.1s forwards;
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tagline {
+    font-family: var(--font-jp-head);
+    font-weight: 700;
+    font-size: 1.35rem;
+    max-width: 20em;
+    margin-bottom: 0.9rem;
+  }
+  .hero-sub { color: var(--ink-soft); max-width: 28em; margin-bottom: 1.7rem; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-size: 0.85rem; letter-spacing: 0.05em;
+    background: var(--wine); color: var(--cream);
+    padding: 0.85em 1.5em; border-radius: 999px; text-decoration: none;
+  }
+  .btn:hover { background: var(--ink); }
+
+  /* ---------- drop swatches ---------- */
+  .drop-stack { position: relative; height: 15rem; }
+  .drop {
+    position: absolute;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .drop-circle {
+    width: 5.4rem; height: 5.4rem; border-radius: 50%;
+    box-shadow: 0.3rem 0.5rem 1rem rgba(0,0,0,0.12);
+    position: relative; overflow: hidden;
+  }
+  .drop-circle::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.8), transparent 40%);
+  }
+  .drop-name {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.02em;
+  }
+  .d1 { left: 0; top: 0.5rem; }
+  .d1 .drop-circle { background: var(--rose); }
+  .d2 { left: 6.5rem; top: 3.2rem; }
+  .d2 .drop-circle { background: var(--gold); }
+  .d3 { left: 2.6rem; top: 7rem; }
+  .d3 .drop-circle { width: 4.4rem; height: 4.4rem; background: var(--wine); }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  section.block { padding: 4.5rem 0; border-bottom: 1px solid var(--line); }
+  .block-head { margin-bottom: 2.2rem; }
+  .block-head h2 { font-family: var(--font-jp-head); font-weight: 700; font-size: 1.55rem; margin-top: 0.4rem; }
+
+  /* ---------- こだわり ---------- */
+  .care-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem 2.2rem;
+  }
+  .care-item { display: flex; gap: 1rem; }
+  .care-mark {
+    flex: none; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    border: 1px solid var(--gold); color: var(--wine);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-style: italic; font-size: 0.95rem;
+  }
+  .care-item h3 { font-family: var(--font-jp-head); font-weight: 700; font-size: 1.02rem; margin-bottom: 0.3rem; }
+  .care-item p { margin: 0; color: var(--ink-soft); font-size: 0.94rem; }
+
+  /* ---------- MENU ---------- */
+  .menu-card {
+    background: var(--cream-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2.2rem 2.4rem;
+  }
+  .menu-row {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px dotted var(--line);
+  }
+  .menu-row:last-child { border-bottom: none; }
+  .menu-name { font-family: var(--font-jp-head); font-weight: 700; }
+  .menu-desc { color: var(--ink-soft); font-size: 0.85rem; }
+  .menu-fill { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-0.35em); }
+  .menu-price { font-family: var(--font-display); font-style: italic; color: var(--wine); white-space: nowrap; }
+
+  /* ---------- PALETTE ---------- */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+    gap: 1.6rem;
+  }
+  .swatch {
+    display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+  }
+  .swatch-circle {
+    width: 4rem; height: 4rem; border-radius: 50%;
+    position: relative; overflow: hidden;
+    box-shadow: 0.15rem 0.25rem 0.6rem rgba(0,0,0,0.1);
+  }
+  .swatch-circle::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.75), transparent 40%);
+  }
+  .swatch-name {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 0.72rem; text-align: center; color: var(--ink-soft);
+  }
+  .c1 { background: var(--rose); } .c2 { background: var(--gold); } .c3 { background: var(--wine); }
+  .c4 { background: #d8c3a5; } .c5 { background: #94a189; } .c6 { background: #c97b5f; }
+
+  /* ---------- BOOKING ---------- */
+  .booking-card {
+    border: 1px solid var(--gold);
+    outline: 1px solid var(--gold);
+    outline-offset: 5px;
+    border-radius: 4px;
+    padding: 2.4rem 2.2rem;
+    text-align: center;
+  }
+  .booking-card h2 { font-family: var(--font-jp-head); font-weight: 700; font-size: 1.4rem; margin-bottom: 0.7rem; }
+  .booking-card p { color: var(--ink-soft); max-width: 26em; margin: 0 auto 1.4rem; }
+
+  .site-footer {
+    padding: 2.6rem 0 3.2rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.8rem;
+  }
+  .foot-note { font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-soft); }
+
+  @media (max-width: 720px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .care-grid { grid-template-columns: 1fr; }
+    .drop-stack { height: 13rem; margin-top: 0.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-word { animation: none; opacity: 1; transform: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="nav">
+    <div class="wrap">
+      <span class="nav-mark">Maison Ongle</span>
+      <a class="nav-cta" href="#booking">ご予約はこちら</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Private Nail Atelier</p>
+        <h1 class="hero-word">Maison Ongle</h1>
+        <p class="hero-tagline">指先から始まる、上品な自分時間。</p>
+        <p class="hero-sub">一人ひとりの爪の形・骨格に合わせて、長く楽しめる上品なネイルをご提案します。完全予約制の小さなアトリエです。</p>
+        <a class="btn" href="#booking">空き状況を見る →</a>
+      </div>
+      <div class="drop-stack" aria-hidden="true">
+        <div class="drop d1"><div class="drop-circle"></div><span class="drop-name">Rose Quartz</span></div>
+        <div class="drop d2"><div class="drop-circle"></div><span class="drop-name">Champagne</span></div>
+        <div class="drop d3"><div class="drop-circle"></div><span class="drop-name">Bordeaux</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <p class="eyebrow">Our care</p>
+        <h2>当店のこだわり</h2>
+      </div>
+      <div class="care-grid reveal">
+        <div class="care-item">
+          <span class="care-mark">1</span>
+          <div><h3>丁寧な甘皮ケア</h3><p>深爪・巻き爪のお悩みにも配慮しながら、時間をかけて整えます。</p></div>
+        </div>
+        <div class="care-item">
+          <span class="care-mark">2</span>
+          <div><h3>持ちを支える下地作り</h3><p>仕上がりよりも、まず土台。ここに一番時間をかけています。</p></div>
+        </div>
+        <div class="care-item">
+          <span class="care-mark">3</span>
+          <div><h3>流行に左右されない色選び</h3><p>その時だけでなく、長く着けていて飽きない上品な色をご提案します。</p></div>
+        </div>
+        <div class="care-item">
+          <span class="care-mark">4</span>
+          <div><h3>完全予約制</h3><p>お一人お一人の施術に集中できる、静かな空間をご用意しています。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <p class="eyebrow">Menu</p>
+        <h2>メニュー</h2>
+      </div>
+      <div class="menu-card reveal">
+        <div class="menu-row">
+          <span class="menu-name">ジェルネイル（オフ込）</span>
+          <span class="menu-desc">ハンド・全10本</span>
+          <span class="menu-fill"></span>
+          <span class="menu-price">¥8,800〜</span>
+        </div>
+        <div class="menu-row">
+          <span class="menu-name">フットジェル</span>
+          <span class="menu-desc">角質ケア込み</span>
+          <span class="menu-fill"></span>
+          <span class="menu-price">¥9,800〜</span>
+        </div>
+        <div class="menu-row">
+          <span class="menu-name">ハンドケア</span>
+          <span class="menu-desc">パラフィンパック</span>
+          <span class="menu-fill"></span>
+          <span class="menu-price">¥3,300</span>
+        </div>
+        <div class="menu-row">
+          <span class="menu-name">デザイン持ち込み</span>
+          <span class="menu-desc">画像をお見せください</span>
+          <span class="menu-fill"></span>
+          <span class="menu-price">応相談</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head reveal">
+        <p class="eyebrow">Palette</p>
+        <h2>人気のカラー</h2>
+      </div>
+      <div class="palette-grid reveal">
+        <div class="swatch"><div class="swatch-circle c1"></div><span class="swatch-name">Rose Quartz</span></div>
+        <div class="swatch"><div class="swatch-circle c2"></div><span class="swatch-name">Champagne</span></div>
+        <div class="swatch"><div class="swatch-circle c3"></div><span class="swatch-name">Bordeaux</span></div>
+        <div class="swatch"><div class="swatch-circle c4"></div><span class="swatch-name">Milk Tea</span></div>
+        <div class="swatch"><div class="swatch-circle c5"></div><span class="swatch-name">Sage</span></div>
+        <div class="swatch"><div class="swatch-circle c6"></div><span class="swatch-name">Terracotta</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="booking" style="border-bottom: none;">
+    <div class="wrap">
+      <div class="booking-card reveal">
+        <p class="eyebrow">Reservation</p>
+        <h2>ご予約はオンラインから</h2>
+        <p>完全予約制のため、事前のご予約をお願いしております。空き状況はオンラインカレンダーからご確認いただけます。</p>
+        <a class="btn" href="#">空き状況を見る →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer wrap">
+    <span class="nav-mark">Maison Ongle</span>
+    <span class="foot-note">PRIVATE NAIL ATELIER — SAMPLE LP</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (reduced || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
