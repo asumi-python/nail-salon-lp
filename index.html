@@ -100,23 +100,28 @@
   }
   .nav-cta:hover { background: var(--wine); color: var(--cream); }
 
-  /* ---------- HERO ---------- */
+  /* ---------- PHOTO HERO ---------- */
   .hero {
-    padding: 5rem 0 5.5rem;
-    border-bottom: 1px solid var(--line);
-    background: radial-gradient(ellipse 55% 40% at 88% 0%, color-mix(in srgb, var(--gold) 20%, transparent), transparent);
+    position: relative;
+    min-height: 34rem;
+    display: flex;
+    align-items: flex-end;
+    background: url("images/hero-nails.jpg") center 42% / cover no-repeat;
   }
-  .hero .wrap {
-    display: grid; grid-template-columns: 1.1fr 1fr;
-    gap: 3rem; align-items: center;
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20, 12, 12, 0.15) 0%, rgba(20, 12, 12, 0.72) 100%);
   }
+  .hero .wrap { position: relative; z-index: 1; padding-bottom: 3rem; }
+  .hero .eyebrow { color: #f0dfc9; }
   .hero-word {
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
     font-size: clamp(2.4rem, 5.5vw, 3.6rem);
     letter-spacing: 0.02em;
-    color: var(--wine);
+    color: #fff;
     margin: 0.6rem 0 1.1rem;
     opacity: 0;
     animation: rise-in 0.8s ease 0.1s forwards;
@@ -131,8 +136,19 @@
     font-size: 1.35rem;
     max-width: 20em;
     margin-bottom: 0.9rem;
+    color: #fff;
   }
-  .hero-sub { color: var(--ink-soft); max-width: 28em; margin-bottom: 1.7rem; }
+  .hero-sub { color: #ecdfd8; max-width: 28em; margin-bottom: 1.7rem; }
+
+  /* ---------- FULL-BLEED PHOTO BAND ---------- */
+  .photo-band {
+    width: 100%;
+    aspect-ratio: 21 / 8;
+    background-size: cover;
+    background-position: center;
+  }
+  .photo-band.care { background-image: url("images/care-process.jpg"); }
+  .photo-band.palette { background-image: url("images/palette-nails.jpg"); background-position: center 30%; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 0.5em;
@@ -142,36 +158,10 @@
   }
   .btn:hover { background: var(--ink); }
 
-  /* ---------- drop swatches ---------- */
-  .drop-stack { position: relative; height: 15rem; }
-  .drop {
-    position: absolute;
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  }
-  .drop-circle {
-    width: 5.4rem; height: 5.4rem; border-radius: 50%;
-    box-shadow: 0.3rem 0.5rem 1rem rgba(0,0,0,0.12);
-    position: relative; overflow: hidden;
-  }
-  .drop-circle::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 32% 26%, rgba(255,255,255,0.8), transparent 40%);
-  }
-  .drop-name {
-    font-family: var(--font-display); font-style: italic;
-    font-size: 0.72rem; color: var(--ink-soft); letter-spacing: 0.02em;
-  }
-  .d1 { left: 0; top: 0.5rem; }
-  .d1 .drop-circle { background: var(--rose); }
-  .d2 { left: 6.5rem; top: 3.2rem; }
-  .d2 .drop-circle { background: var(--gold); }
-  .d3 { left: 2.6rem; top: 7rem; }
-  .d3 .drop-circle { width: 4.4rem; height: 4.4rem; background: var(--wine); }
-
-  /* ---------- reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  /* ---------- reveal（JSが動かなくても既定で表示） ---------- */
+  .reveal { opacity: 1; transform: none; }
+  .reveal.pre { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.pre.is-visible { opacity: 1; transform: translateY(0); }
 
   section.block { padding: 4.5rem 0; border-bottom: 1px solid var(--line); }
   .block-head { margin-bottom: 2.2rem; }
@@ -254,9 +244,9 @@
   .foot-note { font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ink-soft); }
 
   @media (max-width: 720px) {
-    .hero .wrap { grid-template-columns: 1fr; }
+    .hero { min-height: 26rem; }
     .care-grid { grid-template-columns: 1fr; }
-    .drop-stack { height: 13rem; margin-top: 0.5rem; }
+    .photo-band { aspect-ratio: 4 / 3; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -276,18 +266,11 @@
 
   <section class="hero">
     <div class="wrap">
-      <div>
-        <p class="eyebrow">Private Nail Atelier</p>
-        <h1 class="hero-word">Maison Ongle</h1>
-        <p class="hero-tagline">指先から始まる、上品な自分時間。</p>
-        <p class="hero-sub">一人ひとりの爪の形・骨格に合わせて、長く楽しめる上品なネイルをご提案します。完全予約制の小さなアトリエです。</p>
-        <a class="btn" href="#booking">空き状況を見る →</a>
-      </div>
-      <div class="drop-stack" aria-hidden="true">
-        <div class="drop d1"><div class="drop-circle"></div><span class="drop-name">Rose Quartz</span></div>
-        <div class="drop d2"><div class="drop-circle"></div><span class="drop-name">Champagne</span></div>
-        <div class="drop d3"><div class="drop-circle"></div><span class="drop-name">Bordeaux</span></div>
-      </div>
+      <p class="eyebrow">Private Nail Atelier</p>
+      <h1 class="hero-word">Maison Ongle</h1>
+      <p class="hero-tagline">指先から始まる、上品な自分時間。</p>
+      <p class="hero-sub">一人ひとりの爪の形・骨格に合わせて、長く楽しめる上品なネイルをご提案します。完全予約制の小さなアトリエです。</p>
+      <a class="btn" href="#booking">空き状況を見る →</a>
     </div>
   </section>
 
@@ -317,6 +300,8 @@
       </div>
     </div>
   </section>
+
+  <div class="photo-band care reveal" aria-hidden="true"></div>
 
   <section class="block">
     <div class="wrap">
@@ -352,6 +337,8 @@
       </div>
     </div>
   </section>
+
+  <div class="photo-band palette reveal" aria-hidden="true"></div>
 
   <section class="block">
     <div class="wrap">
@@ -393,9 +380,9 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var items = document.querySelectorAll('.reveal');
     if (reduced || !('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('is-visible'); });
       return;
     }
+    items.forEach(function (el) { el.classList.add('pre'); });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
