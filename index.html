@@ -148,7 +148,33 @@
     background-position: center;
   }
   .photo-band.care { background-image: url("images/care-process.jpg"); }
-  .photo-band.palette { background-image: url("images/palette-nails.jpg"); background-position: center 30%; }
+
+  /* ---------- PALETTE PHOTO + OVERLAY CARD ---------- */
+  .palette-photo-section {
+    min-height: 32rem;
+    background: url("images/palette-nails.jpg") center 30% / cover no-repeat;
+    border-bottom: 1px solid var(--line);
+  }
+  .palette-photo-section .wrap {
+    display: flex; align-items: center; justify-content: flex-end;
+    min-height: 32rem;
+    padding-top: 3rem; padding-bottom: 3rem;
+  }
+  .palette-overlay-card {
+    background: color-mix(in srgb, var(--cream) 90%, transparent);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 2.2rem 2.4rem;
+    max-width: 24rem;
+    box-shadow: 0 1rem 2.5rem rgba(0,0,0,0.12);
+  }
+  .palette-overlay-card .palette-grid {
+    margin-top: 1.4rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem 1rem;
+  }
+  .palette-overlay-card .swatch-circle { width: 3.2rem; height: 3.2rem; }
+  .palette-overlay-card .swatch-name { font-size: 0.66rem; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 0.5em;
@@ -247,6 +273,8 @@
     .hero { min-height: 26rem; }
     .care-grid { grid-template-columns: 1fr; }
     .photo-band { aspect-ratio: 4 / 3; }
+    .palette-photo-section { min-height: 24rem; }
+    .palette-photo-section .wrap { justify-content: center; min-height: 24rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -338,21 +366,19 @@
     </div>
   </section>
 
-  <div class="photo-band palette reveal" aria-hidden="true"></div>
-
-  <section class="block">
+  <section class="palette-photo-section">
     <div class="wrap">
-      <div class="block-head reveal">
+      <div class="palette-overlay-card reveal">
         <p class="eyebrow">Palette</p>
         <h2>人気のカラー</h2>
-      </div>
-      <div class="palette-grid reveal">
+        <div class="palette-grid">
         <div class="swatch"><div class="swatch-circle c1"></div><span class="swatch-name">Rose Quartz</span></div>
         <div class="swatch"><div class="swatch-circle c2"></div><span class="swatch-name">Champagne</span></div>
         <div class="swatch"><div class="swatch-circle c3"></div><span class="swatch-name">Bordeaux</span></div>
         <div class="swatch"><div class="swatch-circle c4"></div><span class="swatch-name">Milk Tea</span></div>
         <div class="swatch"><div class="swatch-circle c5"></div><span class="swatch-name">Sage</span></div>
         <div class="swatch"><div class="swatch-circle c6"></div><span class="swatch-name">Terracotta</span></div>
+        </div>
       </div>
     </div>
   </section>
